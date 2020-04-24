@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>Live coronavirus update</title>
+  </head>
+  <body style="background-color:#15448f">
+    {% block body %}
+    {% endblock %}
+  </body>
+  <script>
+    var data = null;
+    var xhr = new XMLHttpRequest();
+    let countryName = document.querySelector("#country-name");
+    let countrySelection = document.querySelector("#countrySelection");
+    xhr.withCredentials = true;
+
+    xhr.addEventListener("readystatechange", function () {
+    if (this.readyState === this.DONE) {
+      main(this);
+    }
+    });
+
+    xhr.open("GET", "https://covid-193.p.rapidapi.com/countries");
+    xhr.setRequestHeader("x-rapidapi-host", "covid-193.p.rapidapi.com");
+    xhr.setRequestHeader("x-rapidapi-key", "a3dd48e29amshc8331b9f27e2938p12df0bjsn79d086cfd0f9");
+    xhr.send(data);
+
+    countryName.onkeyup = (e) => {
+      let counter = 0;
+      e.preventDefault();
+
+      for(let i = 0; i < countrySelection.childNodes.length; i++){
+        if(counter % 2 != 0){
+          if(countrySelection.childNodes[i].firstChild.innerHTML.toLowerCase().substr(0, countryName.value.length)
+          == countryName.value.toLowerCase()){
+            countrySelection.childNodes[i].style.display = "block";
+          }else{
+            countrySelection.childNodes[i].style.display = "none";
+          }
+        }
+
+        counter++;
+      }
+    }
+  </script>
+</html>

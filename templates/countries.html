@@ -1,0 +1,9 @@
+{% extends 'model.html' %}
+
+{% block body %}
+  <h1 class="text-center text-light">Live coronavirus update in {{ heading }}</h1>
+  <h2 class="text-light">Cases: {{ cases }}</h2>
+  <h2 class="text-light">Deaths: {{ deaths }}</h2>
+  <h2 class="text-light">Recovered: {{ recovered }}</h2>
+  <a class="btn btn-danger ml-2" href="{{ url_for('index') }}">Return</a>
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends 'model.html' %}
+
+{% block body %}
+  <h1 class="text-center text-light">Live coronavirus update</h1>
+  <div class="container row">
+    <div class="col-6" style="background-color:#249dff;border-radius:10px;margin-left:80px">
+      <h1 class="display-5 text-light text-center">World data</h1>
+      <h1 class="text-light ml-5" style="font-size:30px">Cases: {{ world_cases }}</h1>
+      <h1 class="text-light ml-5" style="font-size:30px">Deaths: {{ world_deaths }}</h1>
+      <h1 class="text-light ml-5" style="font-size:30px">Recovered: {{ world_recovered }}</h1>
+    </div>
+    <div class="col-4 ml-3" style="background-color:#249dff;border-radius:10px">
+      <form class="ml-4">
+        <div class="form-group">
+          <label for="country_name" class="text-white">
+            Search for your country:
+            <input type="search" class="form-control" id="country-name" placeholder="Enter country name">
+          </label>
+        </div>
+      </form>
+      <h2 class="lead ml-5 text-light">All countries</h2>
+      <ul id="countrySelection" class="ml-4" style="list-style:none; overflow-y:auto; height:300px; width:250px">
+        {% for country in countries %}
+          <li><a href="{{ url_for('country', country=country) }}" class="text-light">{{ country }}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+{% endblock %}
